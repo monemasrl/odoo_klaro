@@ -1,6 +1,6 @@
-============================
-[14.0] Website Smart Buttons
-============================
+========================
+[14.0] Klaro Integration
+========================
 
 Cookie Consent Klaro Integration
 
