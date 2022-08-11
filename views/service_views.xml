@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Tree view for "klaro.service" -->
+        <record id="view_klaro_service_tree" model="ir.ui.view">
+            <field name="name">view.klaro.service.tree</field>
+            <field name="model">klaro.service</field>
+            <field name="type">tree</field>
+            <field name="mode">primary</field>
+            <field name="priority" eval="16" />
+            <field name="active" eval="True" />
+            <field name="arch" type="xml">
+                <tree string="javascript\_snippet_tree" create="true" delete="true" edit="true">
+                    <field name="name" />
+                    <field name="title" />
+                    <field name="required" widget="boolean_toggle"/>
+                    <field name="opt_out" string="Opt Out" widget="boolean_toggle"/>
+                    <field name="only_once" widget="boolean_toggle" />
+                    <field name="purpose_ids" string="Purposes" widget="many2many_tags" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form view for "klaro.service" -->
+        <record id="view_klaro_service_form" model="ir.ui.view">
+            <field name="name">view.klaro.service.form</field>
+            <field name="model">klaro.service</field>
+            <field name="type">form</field>
+            <field name="mode">primary</field>
+            <field name="priority" eval="16" />
+            <field name="active" eval="True" />
+            <field name="arch" type="xml">
+                <form string="klaro_service_form" create="true" delete="true" edit="true">
+                    <header>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" />
+                            <h1>
+                                <field name="name" class="oe_inline"
+                                    placeholder="name" />
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="title" />
+                                <field name="purpose_ids" string="Purposes" widget="many2many_tags" />
+                            </group>
+                            <group>
+                                <field name="contextual_consent_only" />
+                                <field name="required" widget="boolean_toggle"/>
+                                <field name="opt_out" widget="boolean_toggle"/>
+                                <field name="only_once" widget="boolean_toggle"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="description" />
+                        </group>
+                        <notebook>
+                            <page string="Events">
+                                <group>
+                                    <field name="on_accept" />
+                                    <field name="on_decline" />
+                                    <field name="on_init" />
+                                </group>
+                            </page>
+                            <page string="Cookies/Vars">
+                                <group>
+                                    <field name="cookies" />
+                                    <field name="vars" />
+                                </group>
+                            </page>
+                            <page string="Callback">
+                                <group>
+                                    <field name="callback" />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Search view for "klaro.service" -->
+        <record id="view_klaro_service_search" model="ir.ui.view">
+            <field name="name">view.klaro.service.search</field>
+            <field name="model">klaro.service</field>
+            <field name="type">search</field>
+            <field name="mode">primary</field>
+            <field name="priority" eval="16" />
+            <field name="active" eval="True" />
+            <field name="arch" type="xml">
+                <search string="klaro_service_search">
+                    <field name="name" />
+                    <field name="title" />
+                    <field name="purpose_ids" />
+                </search>
+            </field>
+        </record>
+
+        <!-- Main window action for "klaro.service" -->
+        <record id="action_klaro_service_act_window" model="ir.actions.act_window">
+            <field name="type">ir.actions.act_window</field>
+            <field name="name">Klaro Services</field>
+            <field name="res_model">klaro.service</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="target">current</field>
+            <field name="domain">[]</field>
+            <field name="context">\{}</field>
+            <field name="search_view_id" ref="view_klaro_service_search" />
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add new Klaro Service
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <menuitem
+            id="klaro_config_menu"
+            name="Klaro"
+            parent="website.menu_website_global_configuration"
+            sequence="50"/>
+<!--
+
+Website
+=======
+
+Inherited Views
+- - - - - - - - - - - - - - 
+- Model·········: website
+- Base Module···: website
+- Mode··········: extension
+- View priority·: 16
+- - - - - - - - - - - - - - 
+
+-->
+
+<!-- Extension Inherited .:Tree:. view for "website" -->
+<!-- <record id="view_website_tree_inherited" model="ir.ui.view">
+    <field name="name">view.website.tree inherited</field>
+    <field name="model">website</field>
+    <field name="inherit_id" ref="website.view_website_tree" />
+    <field name="type">tree</field>
+    <field name="mode">extension</field>
+    <field name="priority" eval="16" />
+    <field name="active" eval="True" />
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='name']" position="after">
+            
+        </xpath>
+    </field>
+</record> -->
+
+<!-- Extension Inherited .:Form:. view for "website" -->
+<record id="view_website_form_inherited_klaro" model="ir.ui.view">
+    <field name="name">view.website.form.inherited.klaro</field>
+    <field name="model">website</field>
+    <field name="inherit_id" ref="smart-buttons.view_website_form" />
+    <field name="type">form</field>
+    <field name="mode">extension</field>
+    <field name="priority" eval="16" />
+    <field name="active" eval="True" />
+    <field name="arch" type="xml">
+        <xpath expr="//div[@name='button_box']" position="inside">
+            <button string="Klaro" name="edit_klaro_config" type="object" class="oe_stat_button" icon="fa-check-square-o">
+            </button>
+        </xpath>
+    </field>
+</record>
+
+<record id="view_klaro_website_form" model="ir.ui.view">
+    <field name="name">view.klaro.website.form</field>
+    <field name="model">klaro.website</field>
+    <!-- Please veryfiy, that the following inherited view really sticks to the naming convention. -->
+    <field name="type">form</field>
+    <field name="priority" eval="16" />
+    <field name="active" eval="True" />
+    <field name="arch" type="xml">
+        <form>
+            <header>
+            </header>
+            <sheet>
+                <div class="oe_title">
+                    <h1>
+                        <field name="name" class="oe_inline"
+                            placeholder="name" readonly="1" />
+                    </h1>
+                </div>
+                <field name="website_id" invisible="1" />
+                <group name="klaro_config">
+                    <group string="General">
+                        <field name="klaro_testing" widget="boolean_toggle" />
+                        <field name="klaro_default" widget="boolean_toggle" />
+                        <field name="klaro_no_autoload" widget="boolean_toggle" />
+                        <field name="klaro_privacy_policy_url" required="1" />
+                    </group>
+                    <group string="Appearence">
+                        <field name="klaro_html_text"  widget="boolean_toggle" />
+                        <field name="klaro_disable_powered_by"  widget="boolean_toggle" />
+                        <field name="klaro_accept_all"  widget="boolean_toggle" />
+                        <field name="klaro_hide_decline_all"  widget="boolean_toggle" />
+                        <field name="klaro_hide_learn_more"  widget="boolean_toggle" />
+                        <field name="klaro_group_by_purpose"  widget="boolean_toggle" />
+                        <field name="klaro_theme_light" />
+                        <field name="klaro_wide" />
+                    </group>
+                </group>
+                <notebook>
+                    <page name="klaro" string="Storage">
+                        <group name="klaro_storage">
+                            <group string="Storage">
+                                <field name="klaro_storage_method" required="1" />
+                                <field name="klaro_storage_name" required="1" />
+                            </group>
+                            <group string="Cookie">
+                                <field name="klaro_cookie_domain" />
+                                <field name="klaro_expires_after_days" required="1" />
+                            </group>
+                        </group>
+                    </page>
+                    <page name="klaro_position" string="Modal/Notice">
+                        <group name="klaro_position" string="Modal/Notice">
+                            <group>
+                                <field name="klaro_must_consent" widget="boolean_toggle" />
+                                <field name="klaro_notice_as_modal"  widget="boolean_toggle" />
+                                <field name="klaro_embedded" widget="boolean_toggle" />
+                            </group>
+                            <group>
+                                <field name="klaro_vertical_position" />
+                                <field name="klaro_horizontal_position" />
+                                <field name="klaro_element_id" />
+                                <field name="klaro_additional_class" />
+                            </group>
+                        </group>
+                        <group>
+                            <group col="2" colspan="2">
+                                <field name="klaro_title" />
+                                <field name="klaro_consent_notice_description" />
+                                <field name="klaro_consent_modal_description" />
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Klaro Services">
+                        <group name="klaro_services">
+                            <field string="Services" name="klaro_service_ids" widget="many2many_tags" />
+                        </group>
+                    </page> 
+                    <page name="klaro_watch" string="Watch">
+                        <group name="klaro_watch">
+                            <field name="klaro_watch_enabled" widget="boolean_toggle" />
+                            <field name="klaro_watch_function" />
+                        </group>
+                    </page>                  
+                </notebook>
+            </sheet>
+        </form>
+    </field>
+</record>
+ <record id="action_website_klaro_config_form" model="ir.actions.act_window">
+    <field name="name">Klaro Config</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">klaro.website</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">form</field>
+    <!-- <field name="view_id" ref="view_klaro_website_form" /> -->
+    <field name="context">{'default_website_id' : active_id}</field>
+    <field name="target">current</field>
+</record>
+
+<!-- Extension Inherited .:Search:. view for "website" -->
+<!-- <record id="view_website_search_inherited" model="ir.ui.view">
+    <field name="name">view.website.search inherited</field>
+    <field name="model">website</field>
+    <field name="inherit_id" ref="website.view_website_search" />
+    <field name="type">search</field>
+    <field name="mode">extension</field>
+    <field name="priority" eval="16" />
+    <field name="active" eval="True" />
+    <field name="arch" type="xml">
+        
+        <xpath expr="//field[@name='name']" position="after">
+            
+        </xpath>
+       
+    </field>
+</record> -->
+
+    </data>
+</odoo>

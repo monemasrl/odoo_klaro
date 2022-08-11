@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_klaro_purpose_public,access_klaro_purpose_designer,model_klaro_purpose,,1,0,0,0
+access_klaro_service_public,access_klaro_service_designer,model_klaro_service,,1,0,0,0
+access_klaro_website_public,access_klaro_website_designer,model_klaro_website,,1,0,0,0
+access_klaro_purpose_designer,access_klaro_purpose_designer,model_klaro_purpose,website.group_website_designer,1,1,1,1
+access_klaro_service_designer,access_klaro_service_designer,model_klaro_service,website.group_website_designer,1,1,1,1
+access_klaro_website_designer,access_klaro_website_designer,model_klaro_website,website.group_website_designer,1,1,1,1

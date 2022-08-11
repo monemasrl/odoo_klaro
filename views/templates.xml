@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <template id="klaro_config" name="klaro_config_template">
+        var klaroConfig = {
+            "version": 1,
+            "storageMethod": "<t t-raw="config['storageMethod']" />",
+            "default": <t t-esc="json.dumps(config['default'])" />,
+            "mustConsent": <t t-esc="json.dumps(config['mustConsent'])" />,
+            "hideDeclineAll": <t t-esc="json.dumps(config['hideDeclineAll'])" />,
+            "htmlTexts": <t t-esc="json.dumps(config['htmlTexts'])" />,
+            "acceptAll": <t t-esc="json.dumps(config['acceptAll'])" />,
+            "disablePoweredBy": <t t-esc="json.dumps(config['disablePoweredBy'])" />,
+            "elementID": "<t t-raw="config['elementID']" />",
+            "cookieExpiresAfterDays": <t t-esc="json.dumps(config['cookieExpiresAfterDays'])" />,
+            "hideLearnMore": <t t-esc="json.dumps(config['hideLearnMore'])" />,
+            <t t-if="'cookieDomain' in config">"cookieDomain": "<t t-raw="config['cookieDomain']" />",</t>
+            <t t-if="'cookieName' in config">"cookieName": "<t t-raw="config['cookieName']" />",</t>
+            <t t-if="'additionalClass' in config">"additionalClass": "<t t-raw="config['additionalClass']" />",</t>
+            "noticeAsModal": <t t-esc="json.dumps(config['noticeAsModal'])" />,
+            "noAutoLoad": <t t-esc="json.dumps(config['noAutoLoad'])" />,
+            "groupByPurpose": <t t-esc="json.dumps(config['groupByPurpose'])" />,
+            "embedded": <t t-esc="json.dumps(config['embedded'])" />,
+            "lang": "<t t-raw="config['lang']" />",
+            "styling": {
+                "theme": <t t-raw="json.dumps(config['styling'])" />
+            },
+            <t t-if="'cookiePath' in config">"cookiePath": "<t t-raw="config['cookiePath']" />",</t>
+            "translations": {
+                <t t-raw="json.dumps(config['lang'])" />: {
+                    "privacyPolicyUrl": <t t-raw="json.dumps(config['privacyPolicyUrl'])" />,
+                    "consentNotice": {
+                        "title": "<t t-raw="config['title']" />",
+                        "description": <t t-raw="json.dumps(config['consentNoticeDescription'])" />
+                    },
+                    "consentModal": {
+                        "title": "<t t-raw="config['title']" />",
+                        "description":  <t t-raw="json.dumps(config['consentModalDescription'])" />
+                    },
+                    "purposes": {}
+                }
+            },
+            "services": [],
+            "callback": function(consent, service) {
+                console.log(
+                    'User consent for service ' + service.name + ': consent=' + consent
+                );
+            },
+        };
+
+        <t t-foreach="config['services']" t-as="s">
+            klaroConfig["services"].push(<t t-call="klaro.klaro_service"><t t-set="service" t-value="s" /></t>);
+        </t>
+        <t t-foreach="config['purposes']" t-as="p">
+            <t t-call="klaro.klaro_purpose"><t t-set="lang" t-value="config['lang']" /><t t-set="purpose" t-value="p" /></t>
+        </t>
+        </template>
+        <template id="klaro_purpose" name="klaro_purpose_template">klaroConfig["translations"]["<t t-raw="lang" />"]["purposes"][<t t-raw="json.dumps(purpose['name'])" />] = { 
+            <t t-if="'title' in purpose">"title": <t t-raw="json.dumps(purpose['title'])" />,</t>
+            <t t-if="'description' in purpose">"description": <t t-raw="json.dumps(purpose['description'])" /></t>
+        };</template>
+        <template id="klaro_service" name="klaro_service_template">{ 
+            "name": "<t t-esc="service['name']" />",
+            <t t-if="'title' in service">"title": <t t-raw="json.dumps(service['title'])" />,</t>
+            <t t-if="'description' in service">"description": <t t-raw="json.dumps(service['description'])" />,</t>
+            <t t-if="'contextualConsentOnly' in service">"contextualConsentOnly": <t t-esc="json.dumps(service['contextualConsentOnly'])" />,</t>
+            <t t-if="'onAccept' in service">"onAccept": <t t-raw="service['onAccept']" />,</t>
+            <t t-if="'onDecline' in service">"onDecline": <t t-raw="service['onDecline']" />,</t>
+            <t t-if="'onInit' in service">"onInit": <t t-raw="service['onInit']" />,</t>
+            <t t-if="'required' in service">"required": <t t-esc="json.dumps(service['required'])" />,</t>
+            <t t-if="'optOut' in service">"optOut": <t t-esc="json.dumps(service['optOut'])" />,</t>
+            <t t-if="'onlyOnce' in service">"onlyOnce": <t t-esc="json.dumps(service['onlyOnce'])" />,</t>
+            <t t-if="'vars' in service">"vars": <t t-raw="service['vars']" />,</t>
+            <t t-if="'cookies' in service">"cookies": <t t-raw="service['cookies']" />,</t>
+            <t t-if="'callback' in service">"callback": <t t-raw="service['callback']" />,</t>
+            "purposes": <t t-raw="json.dumps(service['purposes'])" />
+        }</template>
+        <template id="layout" name="Main layout" inherit_id="portal.frontend_layout">
+            <xpath expr="//div[@id='wrapwrap']" position="after">
+                <script id="klaro_cookie_consent">
+                    <t t-set="config" t-value="website.get_klaro_config()" />
+                    <t t-call="klaro.klaro_config" />
+                    // sc.onload = function(){ cm = klaro.getManager(); cm.watch({ 'update': function(obj, name, data) { if (name == 'saveConsents') { console.log(data); } } }); };
+
+                    (function(d,s,u) {
+                        var sc = d.createElement(s); sc.src = u; sc.async = false; d.head.appendChild(sc);
+                        <t t-if="config['watchEnabled']">
+                        sc.onload = function(){ cm = klaro.getManager(); cm.watch({ 'update': <t t-raw="config['watchFunction']" /> }); };
+                        </t>
+                    })(document, 'script', '//cdn.kiprotect.com/klaro/v0.7.18/klaro.js');
+                </script>
+            </xpath>
+        </template>
+    </data>
+</odoo>

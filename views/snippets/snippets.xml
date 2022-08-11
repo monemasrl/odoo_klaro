@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <template id="snippets" name="custom snippets" inherit_id="website.snippets">
+            <xpath expr="//div[@id='snippet_content']/div[@class='o_panel_body']" position="inside">
+                <t t-snippet="klaro.s_consent_link" t-thumbnail="/klaro/static/src/img/cookie_consent.png" />
+            </xpath>
+        </template>
+
+        <template id="snippet_options" inherit_id="website.snippets">
+            <xpath expr="//div[@id='snippet_options']" position="inside">
+                <div data-selector=".s_consent_link">
+                    <div class="dropdown-submenu">
+                        <a tabindex="-2" href="#" class="dropdown-item"><i class="fa fa-align-left"/>Alignment</a>
+                        <div class="dropdown-menu" role="menu">
+                            <a href="#" class="dropdown-item" data-select-class="text-left">Left</a>
+                            <a href="#" class="dropdown-item" data-select-class="text-center">Center</a>
+                            <a href="#" class="dropdown-item" data-select-class="text-right">Right</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div data-js="sizing_y"
+                    data-selector=".s_consent_link"/>
+                <div data-js="content"
+                    data-selector=".s_consent_link,"
+                    data-drop-near=".s_consent_link"
+                    data-drop-in=".content">
+                </div> -->
+            </xpath>
+        </template>
+    </data>
+</odoo>

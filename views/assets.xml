@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="klaro.assets_frontend" inherit_id="website.assets_frontend">
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" href="https://cdn.kiprotect.com/klaro/v0.7.18/klaro.min.css" />
+            <link rel="stylesheet" type="text/scss" href="/klaro/static/src/scss/style.scss"/>
+        </xpath>
+    </template>
+</odoo>
