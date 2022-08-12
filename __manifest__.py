@@ -46,6 +46,7 @@ Cookie Consent Klaro Integration.
     'depends': [
         'base',
         'website',
+        'website_smartbuttons'
     ],
     'data': [
         'views/templates.xml',

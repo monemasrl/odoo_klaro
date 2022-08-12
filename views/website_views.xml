@@ -42,7 +42,7 @@ Inherited Views
 <record id="view_website_form_inherited_klaro" model="ir.ui.view">
     <field name="name">view.website.form.inherited.klaro</field>
     <field name="model">website</field>
-    <field name="inherit_id" ref="smart-buttons.view_website_form" />
+    <field name="inherit_id" ref="website_smartbuttons.view_website_form" />
     <field name="type">form</field>
     <field name="mode">extension</field>
     <field name="priority" eval="16" />
