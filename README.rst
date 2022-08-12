@@ -1,3 +1,7 @@
+.. image:: https://img.shields.io/github/license/monemasrl/odoo_klaro
+   :target: https://github.com/monemasrl/odoo_klaro/blob/14.0/LICENSE
+   :alt: License: MIT
+
 ========================
 [14.0] Klaro Integration
 ========================
