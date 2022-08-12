@@ -7,7 +7,7 @@ Cookie Consent Klaro Integration
 Requirements
 ============
 
-* Website Smart Buttons `[14] <https://github.com/monemasrl/website_smartbuttons/tree/14.0>`
+* Website Smart Buttons `[14] <https://github.com/monemasrl/website_smartbuttons/tree/14.0>`_
 
 Configuration
 =============
