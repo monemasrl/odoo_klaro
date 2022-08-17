@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <data noupdate="0">
-
+<odoo noupdate="0">
         <!-- Tree view for "klaro.service" -->
         <record id="view_klaro_service_tree" model="ir.ui.view">
             <field name="name">view.klaro.service.tree</field>
@@ -115,5 +113,4 @@
                 </p>
             </field>
         </record>
-    </data>
 </odoo>

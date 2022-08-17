@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <data noupdate="0">
+<odoo noupdate="0">
         <template id="snippets" name="custom snippets" inherit_id="website.snippets">
             <xpath expr="//div[@id='snippet_content']/div[@class='o_panel_body']" position="inside">
                 <t t-snippet="klaro.s_consent_link" t-thumbnail="/klaro/static/src/img/cookie_consent.png" />
@@ -28,5 +27,4 @@
                 </div> -->
             </xpath>
         </template>
-    </data>
 </odoo>

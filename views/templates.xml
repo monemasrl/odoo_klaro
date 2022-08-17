@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <data noupdate="0">
+<odoo noupdate="0">
         <template id="klaro_config" name="klaro_config_template">
         var klaroConfig = {
             "version": 1,
@@ -55,11 +54,11 @@
             <t t-call="klaro.klaro_purpose"><t t-set="lang" t-value="config['lang']" /><t t-set="purpose" t-value="p" /></t>
         </t>
         </template>
-        <template id="klaro_purpose" name="klaro_purpose_template">klaroConfig["translations"]["<t t-raw="lang" />"]["purposes"][<t t-raw="json.dumps(purpose['name'])" />] = { 
+        <template id="klaro_purpose" name="klaro_purpose_template">klaroConfig["translations"]["<t t-raw="lang" />"]["purposes"][<t t-raw="json.dumps(purpose['name'])" />] = {
             <t t-if="'title' in purpose">"title": <t t-raw="json.dumps(purpose['title'])" />,</t>
             <t t-if="'description' in purpose">"description": <t t-raw="json.dumps(purpose['description'])" /></t>
         };</template>
-        <template id="klaro_service" name="klaro_service_template">{ 
+        <template id="klaro_service" name="klaro_service_template">{
             "name": "<t t-esc="service['name']" />",
             <t t-if="'title' in service">"title": <t t-raw="json.dumps(service['title'])" />,</t>
             <t t-if="'description' in service">"description": <t t-raw="json.dumps(service['description'])" />,</t>
@@ -91,5 +90,4 @@
                 </script>
             </xpath>
         </template>
-    </data>
 </odoo>

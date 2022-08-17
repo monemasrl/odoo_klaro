@@ -17,18 +17,18 @@ Configuration
 =============
 
 - Purposes
-  
+
   Go to Website -> Configuration -> Klaro Purposes then create your purposes with title and description (i.e. functional, analytics, marketing)
 
 - Services
-  
+
   Go to Website -> Configuration -> Klaro Services then create your services
 
 - Website
 
   Go to Website -> Configuration -> Websites then select your website.
   From the website form click on **Klaro** smartbutton
- 
+
 Bug Tracker
 ===========
 

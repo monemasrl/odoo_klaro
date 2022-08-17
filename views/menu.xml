@@ -6,7 +6,7 @@
             <field name="sequence" eval="10" />
             <field name="parent_id" ref="website.menu_website_global_configuration" />
         </record>
-        
+
         <!-- Main menu for "klaro.service" -->
         <record id="menu_klaro_service" model="ir.ui.menu" >
             <field name="name">Klaro Services</field>

@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <data noupdate="0">
-        <template id="s_consent_link" name="Klaro Consent Link"> 
+<odoo  noupdate="0">
+        <template id="s_consent_link" name="Klaro Consent Link">
             <div class="s_btn text-center pt16 pb16" data-name="Buttons">
                 <a href="#" class="s_consent_link" onclick="klaro.show()">Privacy Consent</a>
             </div>
         </template>
-    </data>
 </odoo>

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <data noupdate="0">
-
+<odoo noupdate="0">
         <menuitem
             id="klaro_config_menu"
             name="Klaro"
@@ -13,12 +11,12 @@ Website
 =======
 
 Inherited Views
-- - - - - - - - - - - - - - 
+- - - - - - - - - - - - - -
 - Model·········: website
 - Base Module···: website
 - Mode··········: extension
 - View priority·: 16
-- - - - - - - - - - - - - - 
+- - - - - - - - - - - - - -
 
 -->
 
@@ -33,7 +31,7 @@ Inherited Views
     <field name="active" eval="True" />
     <field name="arch" type="xml">
         <xpath expr="//field[@name='name']" position="after">
-            
+
         </xpath>
     </field>
 </record> -->
@@ -131,13 +129,13 @@ Inherited Views
                         <group name="klaro_services">
                             <field string="Services" name="klaro_service_ids" widget="many2many_tags" />
                         </group>
-                    </page> 
+                    </page>
                     <page name="klaro_watch" string="Watch">
                         <group name="klaro_watch">
                             <field name="klaro_watch_enabled" widget="boolean_toggle" />
                             <field name="klaro_watch_function" />
                         </group>
-                    </page>                  
+                    </page>
                 </notebook>
             </sheet>
         </form>
@@ -164,13 +162,12 @@ Inherited Views
     <field name="priority" eval="16" />
     <field name="active" eval="True" />
     <field name="arch" type="xml">
-        
+
         <xpath expr="//field[@name='name']" position="after">
-            
+
         </xpath>
-       
+
     </field>
 </record> -->
 
-    </data>
 </odoo>

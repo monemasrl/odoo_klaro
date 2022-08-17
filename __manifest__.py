@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ###############################################################################
 # MIT License
 #
@@ -23,41 +22,32 @@
 # SOFTWARE.
 ###############################################################################
 {
-    'name': 'Cookie Consent Klaro Integration',
-    'summary': 'Cookie Consent Klaro Integration',
-    'version': '14.0.1.1.0',
-
-    'description': """
+    "name": "Cookie Consent Klaro Integration",
+    "summary": "Cookie Consent Klaro Integration",
+    "version": "14.0.1.1.0",
+    "description": """
 Cookie Consent Klaro Integration.
 ==============================================
 
 
     """,
-
-    'author': 'Monema S.r.l.',
-    'maintainer': 'Andrea Bettarini',
-    'contributors': ['Andrea Bettarini <bettarini@monema.it>'],
-
-    'website': 'https://monema.it/',
-
-    'license': 'Other OSI approved licence',
-    'category': 'Uncategorized',
-
-    'depends': [
-        'base',
-        'website',
-        'website_smartbuttons'
+    "author": "Monema S.r.l.",
+    "maintainer": "Andrea Bettarini",
+    "contributors": ["Andrea Bettarini <bettarini@monema.it>"],
+    "website": "https://monema.it/",
+    "license": "Other OSI approved licence",
+    "category": "Uncategorized",
+    "depends": ["base", "website", "website_smartbuttons"],
+    "data": [
+        "views/templates.xml",
+        "views/assets.xml",
+        "views/website_views.xml",
+        "views/service_views.xml",
+        "views/purpose_views.xml",
+        "views/menu.xml",
+        "views/snippets/consent_link.xml",
+        "views/snippets/snippets.xml",
+        "security/ir.model.access.csv",
     ],
-    'data': [
-        'views/templates.xml',
-        'views/assets.xml',
-        'views/website_views.xml',
-        'views/service_views.xml',
-        'views/purpose_views.xml',
-        'views/menu.xml',
-        'views/snippets/consent_link.xml',
-        'views/snippets/snippets.xml',
-        'security/ir.model.access.csv'
-    ],
-    'installable': True
+    "installable": True,
 }
