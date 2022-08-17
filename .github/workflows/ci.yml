@@ -1,0 +1,70 @@
+# This is a basic workflow to help you get started with Actions
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull
+# request events but only for the master branch
+on:
+  push:
+    branches: ["14.0"]
+
+# A workflow run is made up of one or more jobs that can run sequentially or
+# in parallel
+jobs:
+  container-jobs:
+    runs-on: self-hosted
+    container:
+      image: monemaweb/odoo-test:14.0
+      options: --user root
+      env:
+        ADDONS_PATH: /mnt/extra-addons,/__w/odoo_klaro/odoo_klaro/monema,/__w/odoo_klaro/odoo_klaro/contract
+        HOST: postgres
+        USER: odoo
+        PASSWORD: odoo
+
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_PASSWORD: odoo
+          POSTGRES_USER: odoo
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    # Steps represent a sequence of tasks that will be executed as part
+    # of the job
+    steps:
+      - name: Environment variables
+        run: set
+      - name: Checkout OCA/contract
+        uses: actions/checkout@v2
+        with:
+          repository: OCA/contract
+          ref: ${{ env.BRANCH }}
+          path: contract
+          fetch-depth: 0
+      - name: Checkout Contract Sequence
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ env.BRANCH }}
+          path: monema/odoo_klaro
+          fetch-depth: 0
+      - name: Run update configuration
+        run: |
+          /update_conf2.sh
+      - name: Run initdb
+        run: |
+          odoo -i odoo_klaro -d db_test --stop-after-init --no-http \
+            --db_host "$HOST"  --db_user "$USER" --db_password "$PASSWORD"
+      - name: Run unit tests
+        run: |
+          pytest -p no:warnings -rA -s --odoo-database=db_test \
+            --junitxml="${GITHUB_WORKSPACE}/coverage/junit.xml" \
+            --cov-report html:"${GITHUB_WORKSPACE}/coverage/cov.html" \
+            --cov-report xml:"${GITHUB_WORKSPACE}/coverage/coverage.xml" \
+            --cov-report annotate:"${GITHUB_WORKSPACE}/coverage/cov_annotate" \
+            --cov="${GITHUB_WORKSPACE}/monema/odoo_klaro/" \
+            "${GITHUB_WORKSPACE}/monema/odoo_klaro/"
