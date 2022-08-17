@@ -42,7 +42,7 @@ jobs:
       - name: Checkout website_smartbuttons
         uses: actions/checkout@v2
         with:
-          repository: monema/website_smartbuttons
+          repository: monemasrl/website_smartbuttons
           ref: ${{ env.BRANCH }}
           path: monema/website_smartbuttons
           fetch-depth: 0
