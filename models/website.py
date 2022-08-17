@@ -13,7 +13,6 @@ _logger = logging.getLogger(__name__)
 class Website(models.Model):
     _inherit = "website"
 
-    @api.multi
     def edit_klaro_config(self):
         config_id = self.env["klaro.website"].search([("website_id", "=", self.id)])
         action = {
@@ -31,7 +30,6 @@ class Website(models.Model):
 
         return action
 
-    @api.multi
     def get_klaro_config(self):
         KlaroWebsiteModel = self.env["klaro.website"]
         klaro_website_id = KlaroWebsiteModel.search([("website_id", "=", self.id)])
