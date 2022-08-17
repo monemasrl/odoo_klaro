@@ -17,7 +17,6 @@ class Website(models.Model):
         config_id = self.env["klaro.website"].search([("website_id", "=", self.id)])
         action = {
             "type": "ir.actions.act_window",
-            "view_type": "form",
             "view_mode": "form",
             "res_model": "klaro.website",
             "view_id": self.env.ref("klaro.view_klaro_website_form").id,

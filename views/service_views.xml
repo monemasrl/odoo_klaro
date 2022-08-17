@@ -102,7 +102,6 @@
             <field name="name">Klaro Services</field>
             <field name="res_model">klaro.service</field>
             <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
             <field name="target">current</field>
             <field name="domain">[]</field>
             <field name="context">\{}</field>

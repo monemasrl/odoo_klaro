@@ -68,7 +68,6 @@
             <field name="name">Klaro Purposes</field>
             <field name="res_model">klaro.purpose</field>
             <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
             <field name="target">current</field>
             <field name="domain">[]</field>
             <field name="context">\{}</field>

@@ -145,7 +145,6 @@ Inherited Views
     <field name="name">Klaro Config</field>
     <field name="type">ir.actions.act_window</field>
     <field name="res_model">klaro.website</field>
-    <field name="view_type">form</field>
     <field name="view_mode">form</field>
     <!-- <field name="view_id" ref="view_klaro_website_form" /> -->
     <field name="context">{'default_website_id' : active_id}</field>
