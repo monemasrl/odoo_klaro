@@ -27,16 +27,16 @@ class TestKlaro(TestKlaroBase):
         Purpose = self.env["klaro.purpose"]
         self.purpose1 = Purpose.create(
             {
-                "name": "Test Purpose #1",
+                "name": "purpose_1",
                 "description": "Description of the Test Purpose #1",
                 "title": "Title of the Test prupose #1",
             }
         )
         self.purpose2 = Purpose.create(
             {
-                "name": "Test Purpose #1",
-                "description": "Description of the Test Purpose #1",
-                "title": "Title of the Test prupose #1",
+                "name": "purpose_2",
+                "description": "Description of the Test Purpose #2",
+                "title": "Title of the Test prupose #2",
             }
         )
         self.purposes = Purpose.search([])
