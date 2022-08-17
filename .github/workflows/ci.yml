@@ -16,7 +16,7 @@ jobs:
       image: monemaweb/odoo-test:14.0
       options: --user root
       env:
-        ADDONS_PATH: /mnt/extra-addons,/__w/odoo_klaro/odoo_klaro/monema,/__w/odoo_klaro/odoo_klaro/contract
+        ADDONS_PATH: /mnt/extra-addons,/__w/odoo_klaro/odoo_klaro/monema
         HOST: postgres
         USER: odoo
         PASSWORD: odoo
@@ -39,14 +39,14 @@ jobs:
     steps:
       - name: Environment variables
         run: set
-      - name: Checkout OCA/contract
+      - name: Checkout website_smartbuttons
         uses: actions/checkout@v2
         with:
-          repository: OCA/contract
+          repository: monema/website_smartbuttons
           ref: ${{ env.BRANCH }}
-          path: contract
+          path: monema/website_smartbuttons
           fetch-depth: 0
-      - name: Checkout Contract Sequence
+      - name: Checkout Odoo Klaro
         uses: actions/checkout@v2
         with:
           ref: ${{ env.BRANCH }}
