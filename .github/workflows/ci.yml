@@ -11,7 +11,7 @@ on:
 # in parallel
 jobs:
   container-jobs:
-    runs-on: self-hosted
+    runs-on: [self-hosted, global, odoo]
     container:
       image: monemaweb/odoo-test:14.0
       options: --user root
