@@ -16,10 +16,8 @@ class KlaroPurpose(models.Model):
     _rec_name = "name"
     _order = "name ASC"
 
-    name = fields.Char(
-        string="Name", required=True, default=lambda self: _("New"), copy=False
-    )
-    title = fields.Char(string="Title", translate=True)
+    name = fields.Char(required=True, default=lambda self: _("New"), copy=False)
+    title = fields.Char(translate=True)
     description = fields.Text(string="description", translate=True)
 
     @api.constrains("name")

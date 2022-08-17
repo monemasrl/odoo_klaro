@@ -5,3 +5,6 @@
 
 # from . import controllers
 from . import controllers, models
+
+assert controllers
+assert models

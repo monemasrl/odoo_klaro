@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <data noupdate="0">
+<odoo noupdate="0">
         <record id="menu_klaro_configuration" model="ir.ui.menu" >
             <field name="name">Klaro</field>
             <field name="sequence" eval="10" />
@@ -22,5 +21,4 @@
             <field name="action" ref="klaro.action_klaro_purpose_act_window" />
             <field name="parent_id" ref="klaro.menu_klaro_configuration" />
         </record>
-    </data>
 </odoo>

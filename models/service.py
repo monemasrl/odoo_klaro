@@ -16,13 +16,11 @@ class KlaroService(models.Model):
     _rec_name = "name"
     _order = "name ASC"
 
-    name = fields.Char(
-        string="Name", required=True, default=lambda self: _("New"), copy=False
-    )
+    name = fields.Char(required=True, default=lambda self: _("New"), copy=False)
 
-    title = fields.Char(string="Title", copy=False, translate=True)
+    title = fields.Char(copy=False, translate=True)
 
-    description = fields.Text(string="Description", translate=True)
+    description = fields.Text(translate=True)
 
     purpose_ids = fields.Many2many(
         string="purpose",
@@ -32,45 +30,27 @@ class KlaroService(models.Model):
         column2="klaro_service_id",
     )
 
-    contextual_consent_only = fields.Boolean(
-        string="Contextual Consent Only",
-    )
+    contextual_consent_only = fields.Boolean()
 
-    on_accept = fields.Text(
-        string="On Accept",
-    )
+    on_accept = fields.Text()
 
-    on_decline = fields.Text(
-        string="On Decline",
-    )
+    on_decline = fields.Text()
 
-    on_init = fields.Text(
-        string="On Init",
-    )
+    on_init = fields.Text()
 
-    cookies = fields.Text(
-        string="cookies",
-    )
+    cookies = fields.Text()
 
-    vars = fields.Text(
-        string="vars",
-    )
+    vars = fields.Text()
 
-    callback = fields.Text(
-        string="Callback",
-    )
+    callback = fields.Text()
 
-    required = fields.Boolean(
-        string="required",
-    )
+    required = fields.Boolean()
 
     opt_out = fields.Boolean(
         string="optOut",
     )
 
-    only_once = fields.Boolean(
-        string="Only Once",
-    )
+    only_once = fields.Boolean()
 
     @api.constrains("name")
     def _check_name(self):

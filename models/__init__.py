@@ -6,3 +6,7 @@
 from . import website
 from . import purpose
 from . import service
+
+assert website
+assert purpose
+assert service

@@ -239,7 +239,6 @@ class KlaroWebsite(models.Model):
             "styling": {
                 "theme": ["light", "top", "wide"],
             },
-            "lang": lang,
             "noAutoLoad": self.klaro_no_autoload,
             "htmlTexts": self.klaro_html_text,
             "embedded": self.klaro_embedded,
