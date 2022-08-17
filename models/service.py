@@ -55,11 +55,13 @@ class KlaroService(models.Model):
     @api.constrains("name")
     def _check_name(self):
         for record in self:
-            # checking if regular expression find any ' '(space) in name string then it will return False
+            # checking if regular expression find any ' '(space) in name string then
+            # it will return False
             has_space = re.compile(" ").search(record.name)
             if has_space:
                 raise ValidationError(
                     _(
-                        "The name cannot contains spaces, allowed characters are: [a-z,A-Z,0-9,'-','_']"
+                        "The name cannot contains spaces, "
+                        "allowed characters are: [a-z,A-Z,0-9,'-','_']"
                     )
                 )

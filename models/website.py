@@ -230,8 +230,9 @@ class KlaroWebsite(models.Model):
         string="Watch Function",
     )
 
-    def get_klaro_config(self):
+    def build_config(self):
         lang = self.env.user.lang.split("_")[0]
+
         klaro_config = {
             "version": 1,
             "title": self.klaro_title,
@@ -274,38 +275,48 @@ class KlaroWebsite(models.Model):
         if self.klaro_wide:
             klaro_config["styling"].append("wide")
 
+        return klaro_config
+
+    def build_service(self, service):  # noqa: C901
+        service_purposes = []
+        for purpose in service.purpose_ids:
+            service_purposes.append(purpose.name)
+        service_config = {"name": service.name, "purposes": service_purposes}
+
+        if service.title:
+            service_config.update({"title": service.title})
+        if service.description:
+            service_config.update({"description": service.description})
+        if service.contextual_consent_only:
+            service_config.update({"contextualConsentOnly": True})
+        if service.on_init:
+            service_config.update({"onInit": service.on_init})
+        if service.on_accept:
+            service_config.update({"onAccept": service.on_accept})
+        if service.on_decline:
+            service_config.update({"onDecline": service.on_decline})
+        if service.only_once:
+            service_config.update({"onlyOnce": True})
+        if service.required:
+            service_config.update({"required": True})
+        if service.opt_out:
+            service_config.update({"optOut": True})
+        if service.vars:
+            service_config.update({"vars": service.vars})
+        if service.cookies:
+            service_config.update({"cookies": service.cookies})
+
+        return service_config
+
+    def get_klaro_config(self):
+        klaro_config = self.build_config()
+
         klaro_config["services"] = []
         klaro_config["purposes"] = []
 
         for service in self.klaro_service_ids:
-            service_purposes = []
-            for purpose in service.purpose_ids:
-                service_purposes.append(purpose.name)
-            service_config = {"name": service.name, "purposes": service_purposes}
-            if service.title:
-                service_config.update({"title": service.title})
-            if service.description:
-                service_config.update({"description": service.description})
-            if service.contextual_consent_only:
-                service_config.update({"contextualConsentOnly": True})
-            if service.on_init:
-                service_config.update({"onInit": service.on_init})
-            if service.on_accept:
-                service_config.update({"onAccept": service.on_accept})
-            if service.on_decline:
-                service_config.update({"onDecline": service.on_decline})
-            if service.only_once:
-                service_config.update({"onlyOnce": True})
-            if service.required:
-                service_config.update({"required": True})
-            if service.opt_out:
-                service_config.update({"optOut": True})
-            if service.vars:
-                service_config.update({"vars": service.vars})
-            if service.cookies:
-                service_config.update({"cookies": service.cookies})
+            service_config = self.build_service(service)
             klaro_config["services"].append(service_config)
-            _logger.debug("Service Config: {}".format(service_config))
 
         PurposeModel = self.env["klaro.purpose"].sudo()
 
@@ -318,6 +329,5 @@ class KlaroWebsite(models.Model):
                 "description": purpose.description,
             }
             klaro_config["purposes"].append(purpose_config)
-        _logger.debug("Klaro Config: {}".format(klaro_config))
 
         return klaro_config
